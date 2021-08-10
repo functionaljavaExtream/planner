@@ -1,25 +1,34 @@
-import logo from './logo.svg';
+import React, { Component, useState, useEffect } from 'react';
 import './App.css';
+import TodoForm from "./components/TodoForm"
+import List from "./components/List"
 
-function App() {
+const App = () => {
+  const [todos, setTodos] = useState(['js공부']);
+  const [newTodo, setNewTodo] = useState();
+  const changeInputData = (e) => {
+    setNewTodo(e.target.value)
+  }
+
+  const addTodo = (e) => {
+    e.preventDefault();
+    setTodos([...todos, newTodo]);
+  }
+
+  useEffect( () => {
+    console.log("새로운 내용이 랜더링 되었습니다.", todos)
+  }, [todos])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> this is first
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <>
+    <h1>todo 애플리케이션</h1>
+    <form action="">
+        <input type="text" name="" onChange={changeInputData}/>
+        <button onClick={addTodo}>할일추가</button>
+    </form>
 
+    <List todos={todos}/>
+    </>
+  )
+}
 export default App;
