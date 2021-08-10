@@ -4,13 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const name = "Ki"
-const ele =   <h1>Hello, {name}</h1>;
+
 ReactDOM.render(
-  // <React.StrictMode>
-  //   <App />
-  // </React.StrictMode>,
-  ele,
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+
   document.getElementById('root')
   
 
