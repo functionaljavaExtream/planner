@@ -14,6 +14,14 @@ const Header = ({todos}) => {
             </div>
         </div>
     )
+
+        // done이 아닌것만 카운트
+
+//         return (
+//             <div>
+//                 <h1>Hello Todo Application</h1>
+//             </div>
+//         )
 }
 
 export default Header
