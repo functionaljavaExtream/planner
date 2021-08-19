@@ -1,5 +1,5 @@
 import React from "react"
-import './css/Header.css'
+import '../css/Header.css'
 
 const Header = ({todos}) => {
 
@@ -8,6 +8,7 @@ const Header = ({todos}) => {
 
     return (
         <div>
+            <a>home</a>
             <h1>Hello Todo Application</h1>
             <div className="countInfo">
                 you have {notDones.length} todos. Go Ahead
