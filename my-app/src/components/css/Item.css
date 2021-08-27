@@ -1,0 +1,14 @@
+
+
+.done{
+    text-decoration: line-through;
+}
+
+.itemCss {
+    /* display: inline-block; */
+    margin-right: 3rem;
+}
+
+.inline {
+        display: inline-block;
+}

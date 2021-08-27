@@ -4,6 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
+/src/components/css/bulma
+/src/components/css/fontawesome
 
 # testing
 /coverage
