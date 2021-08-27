@@ -1,4 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
+import '../css/bulma/css/bulma.min.css';
+import '../css/TodoList.css';
+// import { Button, Form, Field } from 'react-bulma-components';
 import List from "./List.jsx"
 import Header from "./Header"
 
@@ -57,12 +60,20 @@ const TodoList = () => {
   return (
     <>    
       <Header todos={todos}/>
-        <form action="">
-          <input type="text" name="" value={inputText} onChange={changeInputData}/>
-          <button onClick={addTodo}>할일추가</button>
-        </form>
+      <div className="container">
+        <div className="box">
+            <form  className='form' action="">
+                <div className="column">
+                  <input className='input input-length' type="text" name="" value={inputText} onChange={changeInputData}/>
+                  <button className='button is-primary'  onClick={addTodo}>할일추가</button>
+                </div>
+            </form>
+            <List todos={todos} changeTodoStatus={changeTodoStatus} deleteTodo={deleteTodo}/>
+        </div>
+      </div>
 
-      <List todos={todos} changeTodoStatus={changeTodoStatus} deleteTodo={deleteTodo}/>
+
+
     </>
   )
 }

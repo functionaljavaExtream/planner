@@ -1,3 +1,27 @@
+.todolist-header {
+    text-align: start;
+    padding-top: 5rem
+}
+.headerInfo {
+    margin: 2rem;
+}
+
+.todolist-filter {
+    display: block;
+}
+
+.todo-filter{
+    display: inline;
+}
+
+.todofilter {
+    width: 20%;
+    justify-content: flex-start;
+    height: 2rem;
+    /* margin-bottom: 1rem; */
+}
+
 .countInfo {
-    margin-bottom: 1rem;
+    display: block;
+    align-items: center;
 }
