@@ -1,5 +1,6 @@
 import React from "react"
 import '../css/Header.css'
+import '../css/bulma/css/bulma.min.css';
 
 const Header = ({todos}) => {
 
@@ -7,16 +8,20 @@ const Header = ({todos}) => {
     const notDones = todos.filter(todo => todo.status !== 'done')
 
     return (
-        <div className="todolist-header">
-            <div className="headerInfo">
-                <div className='todo-filter'>
-                    <select className='todofilter' name="" id=""></select>
-                    <div className="countInfo">
-                        you have {notDones.length} todos. Go Ahead
+        <div className="container">
+            <div className="box">
+                    <div className="todolist-header">
+                        <div className="headerInfo">
+                            <div className='todo-filter'>
+                                <div className="countInfo">
+                                    <h1>you have {notDones.length} todos. Go Ahead</h1>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
             </div>
         </div>
+
     )
 }
 

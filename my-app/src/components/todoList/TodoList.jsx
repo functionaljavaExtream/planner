@@ -12,10 +12,10 @@ const TodoList = () => {
   const [todos, setTodos] = useState([]);
 
   // 새로 추가될 리스트상태
-  const [newTodo, setNewTodo] = useState();
+  const [newTodo, setNewTodo] = useState({});
 
   // input태그에 있는 내용상태
-  const [inputText, setInputText] = useState();
+  const [inputText, setInputText] = useState('');
 
   // input태그에 내용이 바뀔때 상태 관리
   const changeInputData = (e) => {
@@ -26,6 +26,11 @@ const TodoList = () => {
   // 할일 추가 버튼 눌렀을 때 상태관리
   const addTodo = (e) => {
     e.preventDefault();
+
+    if(!inputText) {
+      alert('새 할일을 적어주세요')
+      return
+    }
     setTodos([...todos, { 'title' : newTodo, 'id' : `${todos.length}`, 'status': 'todo'}]);
     setInputText('')
   }

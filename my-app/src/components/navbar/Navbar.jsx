@@ -2,7 +2,9 @@ import React from 'react';
 import { IconContext } from 'react-icons';
 import { ImUser } from 'react-icons/im';
 import '../css/Navbar.css';
+import '../css/bulma/css/bulma.min.css';
 const Navbar = () => (
+  <div className="container">
   <nav className="d-flex d-flex flex-center mainNav">
     <div className="d-flex flex-center links-container">
       <a href="#home" className="logo">TodoList</a>
@@ -21,6 +23,8 @@ const Navbar = () => (
       </IconContext.Provider>
     </a>
   </nav>
+  </div>
+
 );
 
 export default Navbar;
