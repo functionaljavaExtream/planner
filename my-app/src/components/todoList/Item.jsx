@@ -21,8 +21,8 @@ const Item = ({index, todo, changeTodoStatus, deleteTodo}) => {
             <tr>
                 <th>{index}</th>
                 <td>{todo.title}</td>
-                <td>JPKim</td>
-                <td>3h</td>
+                <td>{todo.writer}</td>
+                <td>{todo.eta}h</td>
                 <td>
                     <Progress status={todo.status}/>
                 </td>

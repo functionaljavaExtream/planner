@@ -14,7 +14,7 @@ const List = ({todos,changeTodoStatus,deleteTodo }) => {
             <thead>
                 <tr>
                   <th><abbr title="Position">No.</abbr></th>
-                  <th>Todo</th>
+                  <th><abbr title="Todo">Todo</abbr></th>
                   <th><abbr title="writer">Writer</abbr></th>
                   <th><abbr title="ETA">ETA</abbr></th>
                   <th><abbr title="done">Done</abbr></th>
