@@ -7,7 +7,6 @@ import Header from "./Header"
 
 
 
-
 const TodoList = () => {
 
   // 할일 리스트상태
@@ -59,11 +58,19 @@ const TodoList = () => {
   // 할일 추가 버튼 눌렀을 때 상태관리
   const addTodo = (e) => {
     e.preventDefault();
+
     todo.title = inputTitle
     todo.writer = inputWriter
     todo.todo = inputTodo
     todo.eta = inputETA
  
+    const data = {
+      title: inputTitle,
+      writer: inputWriter,
+      todo: inputTodo,
+      eta: inputETA
+    }
+
     setTodos([...todos, todo]);
     setInputTitle('')
     setInputWriter('')
@@ -114,7 +121,8 @@ const TodoList = () => {
   }
 
   return (
-    <>    
+    <>
+    <div className="container">
       <Header todos={todos}/>
       <div className="container">
         <div className="box">
@@ -160,6 +168,8 @@ const TodoList = () => {
             </footer>
           </div>
         </div>
+    </div>
+
     </>
   )
 }
