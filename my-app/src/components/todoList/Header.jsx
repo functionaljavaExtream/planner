@@ -3,7 +3,6 @@ import '../css/Header.css'
 import '../css/bulma/css/bulma.min.css';
 
 const Header = ({todos}) => {
-
     // done이 아닌것만 카운트
     const notDones = todos.filter(todo => todo.status !== 'done')
 

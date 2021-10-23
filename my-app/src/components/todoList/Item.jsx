@@ -13,7 +13,7 @@ const Item = ({index, todo, changeTodoStatus, deleteTodo}) => {
 
     const deleteItem = (e) => {
         const delId = e.target.parentElement.dataset.id
-         deleteTodo(delId)
+        deleteTodo(delId)
     }
 
     return (
@@ -22,6 +22,7 @@ const Item = ({index, todo, changeTodoStatus, deleteTodo}) => {
                 <th>{index}</th>
                 <td>{todo.title}</td>
                 <td>{todo.writer}</td>
+                <td>{todo.todo}</td>
                 <td>{todo.eta}h</td>
                 <td>
                     <Progress status={todo.status}/>

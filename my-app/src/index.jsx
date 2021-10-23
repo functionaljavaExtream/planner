@@ -6,10 +6,9 @@ import './components/css/Index.css';
 import App from './App.jsx';
 import reportWebVitals from './reportWebVitals';
 
-
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App/>
   </React.StrictMode>,
 
   document.getElementById('root')

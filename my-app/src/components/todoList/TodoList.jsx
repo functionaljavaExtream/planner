@@ -4,22 +4,61 @@ import '../css/TodoList.css';
 // import { Button, Form, Field } from 'react-bulma-components';
 import List from "./List.jsx"
 import Header from "./Header"
+const dbReadyurl = 'http://localhost:4000/init'
+const dbReady =  (setTodos) => {
+  fetch(dbReadyurl,{
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'same-origin' // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+  })
+  .then(response => response.json())
+  .then(dataArr=>{
+    let dbTodos = []
+    dataArr.resultData.map(data => {
+      const todo = {
+        title: '',
+        id : ``,
+        status: 'todo',
+        writer: '',
+        todo: '',
+        eta: '',
+      }
+      todo.title = data.todolistTitle
+      todo.todo = data.todolistTodo
+      todo.eta = data.todolistETA
+      todo.writer = data.todolistWriter
+      todo.id = data.todolistCd.toString()      
+      dbTodos.push(todo)
+    })
+    setTodos([...dbTodos])
+  })
 
+}
 
 
 const TodoList = () => {
 
-  // 할일 리스트상태
+
   const [todos, setTodos] = useState([]);
 
   const todo = {
     title: '',
-    id : `${todos.length}`,
+    id : ``,
     status: 'todo',
     writer: '',
     todo: '',
     eta: '',
   }
+  useEffect( () => {
+    dbReady(setTodos)
+  }, [])
+
 
   // 새로 추가될 리스트상태
   const [newTodo, setNewTodo] = useState(todo);
@@ -32,8 +71,7 @@ const TodoList = () => {
 
   // input태그에 내용이 바뀔때 상태 관리
   const changeInputTitle = (e) => {
-    setInputTitle(e.target.value)
-    
+    setInputTitle(e.target.value)    
     setNewTodo(newTodo)
   }
 
@@ -55,8 +93,25 @@ const TodoList = () => {
     setNewTodo(newTodo)
   } 
 
-  // 할일 추가 버튼 눌렀을 때 상태관리
-  const addTodo = (e) => {
+  // 할일 추가 버튼 눌렀을 때 상태관리  
+  const dbfetch =  async (url,data) => {
+    const response = await fetch(url,{
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, *cors, same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrerPolicy: 'same-origin', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      body: JSON.stringify(data)// body data type must match "Content-Type" header
+    })
+    .then(response => response.json())
+    return response    
+  }
+
+  const addTodo = async (e) => {
     e.preventDefault();
 
     todo.title = inputTitle
@@ -71,6 +126,13 @@ const TodoList = () => {
       eta: inputETA
     }
 
+    // DB서버와 연동 가능?
+    const url = 'http://localhost:4000/save'
+
+    const result = await dbfetch(url,data)
+    if(result.result === 'failure') {
+      window.location.href = '/error'
+    }
     setTodos([...todos, todo]);
     setInputTitle('')
     setInputWriter('')
@@ -111,13 +173,40 @@ const TodoList = () => {
 
 
   // 할일 리스트의 delete 버튼을 눌렀을 때 상태관리
-  const deleteTodo = (id) => {
-     todos.map( (todo,index) => {
-      if(todo.id === id) {
+  const dbDeletefetch =  async (url,data) => {
+    const response = await fetch(url,{
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, *cors, same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrerPolicy: 'same-origin', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      body: JSON.stringify(data)// body data type must match "Content-Type" header
+    })
+    .then(response => response.json())
+    return response    
+  }
+  
+  const deleteTodo = async (id) => {
+    const deleteUrl = `http://localhost:4000/delete/${id}`
+    const dbDeletefetch = (url) => {
+      fetch(url,{
+        method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+      })
+    }
+    todos.map( (todo,index) => {
+      console.log(todo.id, 'todo.id')
+      console.log(id , 'id')       
+      if(todo.id === id) { 
         todos.splice(index,1)
       }
     })
     setTodos([...todos])
+    await dbDeletefetch(deleteUrl)
   }
 
   return (
